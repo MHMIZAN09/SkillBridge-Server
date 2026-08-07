@@ -1,0 +1,17 @@
+model SessionNote {
+  id             String   @id @default(uuid())
+  bookingId      String   @unique
+  tutorProfileId String
+  topicsCovered  String?
+  privateNote    String?
+  homework       String?
+  resourceLinks  String[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  booking      Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+
+  @@index([tutorProfileId])
+  @@map("session_notes")
+}

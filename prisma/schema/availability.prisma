@@ -1,0 +1,19 @@
+model AvailabilitySlot {
+  id             String     @id @default(uuid())
+  tutorProfileId String
+  startsAt       DateTime
+  endsAt         DateTime
+  status         SlotStatus @default(AVAILABLE)
+  maxStudents    Int        @default(1)
+  recurringRule  String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+  bookings     Booking[]
+
+  @@unique([tutorProfileId, startsAt, endsAt])
+  @@index([tutorProfileId, startsAt, status])
+  @@index([startsAt, status])
+  @@map("availability_slots")
+}

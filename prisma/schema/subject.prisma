@@ -1,0 +1,34 @@
+model Subject {
+  id          String   @id @default(uuid())
+  categoryId  String
+  name        String
+  slug        String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category Category       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  tutors   TutorSubject[]
+  bookings Booking[]
+
+  @@unique([categoryId, name])
+  @@index([categoryId, isActive])
+  @@map("subjects")
+}
+
+model TutorSubject {
+  tutorProfileId    String
+  subjectId         String
+  customRate        Decimal? @db.Decimal(10, 2)
+  proficiency       String?
+  yearsOfExperience Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+  subject      Subject      @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([tutorProfileId, subjectId])
+  @@index([subjectId])
+  @@map("tutor_subjects")
+}

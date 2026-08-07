@@ -1,0 +1,19 @@
+model LearningGoal {
+  id             String     @id @default(uuid())
+  studentId      String
+  tutorProfileId String?
+  title          String
+  description    String?
+  targetDate     DateTime?
+  progress       Int        @default(0)
+  status         GoalStatus @default(ACTIVE)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  student      User          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  tutorProfile TutorProfile? @relation(fields: [tutorProfileId], references: [id], onDelete: SetNull)
+
+  @@index([studentId, status])
+  @@index([tutorProfileId])
+  @@map("learning_goals")
+}

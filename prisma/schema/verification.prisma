@@ -1,0 +1,16 @@
+model TutorVerificationDocument {
+  id             String             @id @default(uuid())
+  tutorProfileId String
+  documentType   DocumentType
+  documentUrl    String
+  status         VerificationStatus @default(PENDING)
+  adminNote      String?
+  reviewedAt     DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+
+  @@index([tutorProfileId, status])
+  @@map("tutor_verification_documents")
+}

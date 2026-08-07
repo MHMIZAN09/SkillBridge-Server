@@ -12,7 +12,12 @@ model User {
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 
-  tutorProfile TutorProfile?
+  tutorProfile    TutorProfile?
+  studentBookings Booking[]      @relation("StudentBookings")
+  reviews         Review[]       @relation("StudentReviews")
+  payments        Payment[]      @relation("PayerPayments")
+  favorites       Favorite[]
+  learningGoals   LearningGoal[]
 
   @@index([role, status])
   @@index([createdAt])

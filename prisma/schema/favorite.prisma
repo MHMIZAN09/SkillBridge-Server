@@ -1,0 +1,12 @@
+model Favorite {
+  studentId      String
+  tutorProfileId String
+  createdAt      DateTime @default(now())
+
+  student      User         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+
+  @@id([studentId, tutorProfileId])
+  @@index([tutorProfileId])
+  @@map("favorites")
+}
