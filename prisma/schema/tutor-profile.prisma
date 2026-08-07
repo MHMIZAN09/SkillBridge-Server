@@ -1,0 +1,29 @@
+model TutorProfile {
+  id                  String             @id @default(uuid())
+  userId              String             @unique
+  headline            String?
+  bio                 String?
+  experienceYears     Int                @default(0)
+  hourlyRate          Decimal            @db.Decimal(10, 2)
+  currency            String             @default("BDT") @db.VarChar(3)
+  averageRating       Decimal            @default(0) @db.Decimal(3, 2)
+  totalReviews        Int                @default(0)
+  totalCompleted      Int                @default(0)
+  teachingLanguages   String[]
+  deliveryModes       DeliveryMode[]
+  timezone            String             @default("Asia/Dhaka")
+  verificationStatus  VerificationStatus @default(UNVERIFIED)
+  rejectionReason     String?
+  isFeatured          Boolean            @default(false)
+  isAcceptingStudents Boolean            @default(true)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([verificationStatus, isAcceptingStudents])
+  @@index([averageRating])
+  @@index([hourlyRate])
+  @@index([isFeatured])
+  @@map("tutor_profiles")
+}

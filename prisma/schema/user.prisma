@@ -1,0 +1,21 @@
+model User {
+  id              String     @id @default(uuid())
+  name            String
+  email           String     @unique
+  password        String
+  phone           String?    @unique
+  avatarUrl       String?
+  role            Role       @default(STUDENT)
+  status          UserStatus @default(ACTIVE)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  tutorProfile TutorProfile?
+
+  @@index([role, status])
+  @@index([createdAt])
+  @@index([email])
+  @@map("users")
+}

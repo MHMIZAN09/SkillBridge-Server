@@ -1,0 +1,92 @@
+enum Role {
+  STUDENT
+  TUTOR
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  BLOCKED
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum BookingStatus {
+  DRAFT
+  AWAITING_PAYMENT
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  EXPIRED
+  NO_SHOW
+  REFUND_PENDING
+  REFUNDED
+}
+
+enum SlotStatus {
+  AVAILABLE
+  FULL
+  BLOCKED
+  CANCELLED
+}
+
+enum DeliveryMode {
+  ONLINE
+  IN_PERSON
+  HYBRID
+}
+
+enum SessionType {
+  REGULAR
+  TRIAL
+  GROUP
+}
+
+enum PaymentProvider {
+  STRIPE
+  SSLCOMMERZ
+}
+
+enum PaymentStatus {
+  INITIATED
+  PENDING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+  EXPIRED
+  REFUND_PENDING
+  PARTIALLY_REFUNDED
+  REFUNDED
+}
+
+enum ReviewStatus {
+  PUBLISHED
+  HIDDEN
+}
+
+enum CouponType {
+  PERCENTAGE
+  FIXED
+}
+
+enum DocumentType {
+  NATIONAL_ID
+  PASSPORT
+  EDUCATIONAL_CERTIFICATE
+  PROFESSIONAL_CERTIFICATE
+  OTHER
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+
