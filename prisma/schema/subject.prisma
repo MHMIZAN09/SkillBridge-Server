@@ -2,7 +2,6 @@ model Subject {
   id          String   @id @default(uuid())
   categoryId  String
   name        String
-  slug        String   @unique
   description String?
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
